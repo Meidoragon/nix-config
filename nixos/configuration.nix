@@ -79,6 +79,7 @@
   networking.wireless.enable = true;
   networking.wireless.networks = {
     firelink69 = {
+      # pls don't steal my wifi
       psk = "giantdad420";
     };
   };
@@ -100,6 +101,10 @@
       extraGroups = ["wheel" "networkmanager"];
     };
   };
+
+  # allow hyprland
+  programs.hyprland.enable = true;
+  programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.

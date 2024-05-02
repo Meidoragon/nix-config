@@ -14,11 +14,12 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    ./hypr/hypr.nix
   ];
 
   nixpkgs = {
     # You can add overlays here
-    overlays = [
+    # overlays = [
       # If you want to use overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
@@ -28,7 +29,7 @@
       #     patches = [ ./change-hello-to-hi.patch ];
       #   });
       # })
-    ];
+    # ];
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
@@ -45,13 +46,16 @@
 
   # Add stuff for your user as you see fit:
   # home.packages = with pkgs; [ steam ];
+  home.packages = with pkgs; [waybar];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
   programs.neovim.enable = true;
+  programs.vim.enable = true;
   programs.alacritty.enable = true;
   programs.zellij.enable = true;
+
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

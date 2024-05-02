@@ -10,6 +10,13 @@
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 
@@ -44,6 +51,8 @@
       };
     };
 
+    # this currently does nothing because home-manager is not installed by the system?
+    # but we import it up there so it's fine probably
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#meidoragon@Momo'
     homeConfigurations = {
