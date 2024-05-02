@@ -39,18 +39,28 @@
     };
   };
 
+  # This probably does not solve my problems but here we go I guess.
+  hypr.enable = true;
+  
   home = {
     username = "meidoragon";
     homeDirectory = "/home/meidoragon";
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
 
   # Add stuff for your user as you see fit:
   # home.packages = with pkgs; [ steam ];
-  home.packages = with pkgs; [waybar];
+  # home.packages = with pkgs; [waybar];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "meidoragon";
+    userEmail = "104027002+Meidoragon@users.noreply.github.com";
+  };
   programs.neovim.enable = true;
   programs.vim.enable = true;
   programs.alacritty.enable = true;

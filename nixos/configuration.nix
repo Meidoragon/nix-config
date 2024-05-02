@@ -61,6 +61,8 @@
     experimental-features = "nix-command flakes";
     # Deduplicate and optimize nix store
     auto-optimise-store = false;
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+cswVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
 
   i18n.extraLocaleSettings = {
@@ -117,6 +119,10 @@
       PasswordAuthentication = false;
     };
   };
+
+  environment.systemPackages = [
+    pkgs.home-manager
+  ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

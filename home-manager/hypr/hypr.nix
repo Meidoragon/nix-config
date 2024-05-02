@@ -1,34 +1,46 @@
 {
-  inputs,
-  lib,
-  config,
   pkgs,
+  lib,
+  inputs,
+  config,
   ...
-}: {
-  wayland.windowManager.hyprland = {
-    enable = true;
+}: 
+{
+  options = {
+    hypr.enable = 
+      lib.mkEnableOption "enables hypr";
+  };
 
-    settings = {
-      "$mod" = "SUPER";
-      bind = [
-        "ALT, M, exec, alacritty"
+  config = lib.mkIf config.hypr.enable {
+    wayland.windowManager.hyprland = {
+      enable = true;
+
+      plugins = [
+        inputs.hyprland-plugins.packages."${pkgs.system}".borders-plus-plus
       ];
-      #"plugins:borders-plus-plus" = {
-      #  add_borders = 1; # 0 - 9
 
-	# add up to 9 borders
-#	"col.border_1" = "rgb(ffffff)";
-#	"col.border_2" = "rgb(2222ff)";
+      settings = {
+        "$mod" = "SUPER";
+        bind = [
+          "ALT, M, exec, alacritty"
+	  "$mod, 1, exec, hyprctl dispatch exit"
+        ];
 
-	# -1 means "default" as in the one defined in general:border_size
-#	border_size_1 = 10;
-#	border_size_2 = -1;
+        # "plugin:borders-plus-plus" = {
+          # add_borders = 1; # 0 - 9
 
-	# makes outer edges match rounding of the parent. Turn on / off to better understand. Default = on.
-	# natural_rounding = yes;
-        
+	  # add up to 9 borders
+ 	  # "col.border_1" = "rgb(123456)";
+ 	  # "col.border_2" = "rgb(654321)";
 
-#      };
+	  # -1 means "default" as in the one defined in general:border_size
+ 	  # border_size_1 = 10;
+ 	  # border_size_2 = 5;
+
+	  # makes outer edges match rounding of the parent. Turn on / off to better understand. Default = on.
+ 	  # natural_rounding = "yes";
+        #};
+      };
     };
   };
 }
