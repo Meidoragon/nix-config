@@ -18,6 +18,7 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    # ./modules/networking.nix
   ];
 
   nixpkgs = {
@@ -62,7 +63,6 @@
     auto-optimise-store = false;
   };
 
-  # FIXME: Add the rest of your current configuration
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -76,7 +76,12 @@
   };
 
   networking.hostName = "Momo";
-
+  networking.wireless.enable = true;
+  networking.wireless.networks = {
+    firelink69 = {
+      psk = "giantdad420";
+    };
+  };
   
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
