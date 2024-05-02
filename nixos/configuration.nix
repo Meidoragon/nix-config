@@ -79,6 +79,9 @@
 
   
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.devices = [ "nodev" ]; 
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
