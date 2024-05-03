@@ -6,6 +6,9 @@
   ...
 }: 
 {
+  imports = [
+    ./input.nix
+  ];
   options = {
     hypr.enableHypr = 
       lib.mkEnableOption "enables hypr";
@@ -16,6 +19,7 @@
   };
 
   config = lib.mkIf config.hypr.enableHypr {
+    hypr-inputs.enable = true;
     wayland.windowManager.hyprland = {
       # enable = true;
       
@@ -32,6 +36,8 @@
 	  "$mod, 1, exec, hyprctl dispatch exit"
         ];
 	
+	# Just kind of guessed this one.
+	# Good job me.
 	exec-once = [
 	  "waybar"
 	];
@@ -108,7 +114,7 @@
 	decoration = {
 	  # equivalent to css' border-radius; in px
 	  # int: 0
-          rounding = 15;
+          rounding = 6;
 	  # Opacity of active/inactive/fullscreen windows
 	  # int: 1 / 1 / 1
           active_opacity = 1;
