@@ -40,8 +40,10 @@
   };
 
   # This probably does not solve my problems but here we go I guess.
-  hypr.enable = true;
-  
+  hypr.enableHypr = true;
+  hypr.enableBorders = true;
+  hypr.enableBars = true;
+
   home = {
     username = "meidoragon";
     homeDirectory = "/home/meidoragon";
@@ -50,9 +52,15 @@
     };
   };
 
+  # Fonts!
+  fonts.fontconfig.enable = true;
+
   # Add stuff for your user as you see fit:
   # home.packages = with pkgs; [ steam ];
-  # home.packages = with pkgs; [waybar];
+  home.packages = with pkgs; [
+    waybar
+    (nerdfonts.override { fonts = ["Mononoki"]; })
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
@@ -65,7 +73,6 @@
   programs.vim.enable = true;
   programs.alacritty.enable = true;
   programs.zellij.enable = true;
-
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

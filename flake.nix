@@ -29,6 +29,7 @@
     self,
     nixpkgs,
     home-manager,
+    hyprland,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -60,7 +61,11 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         # > Our main home-manager configuration file <
-        modules = [./home-manager/home.nix];
+        modules = [
+	  hyprland.homeManagerModules.default
+	  {wayland.windowManager.hyprland.enable = true;}
+	  ./home-manager/home.nix
+	];
       };
     };
   };
